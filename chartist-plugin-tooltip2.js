@@ -138,7 +138,7 @@
                     var currentYPosition = e.pageY - (boxData.top + (document.documentElement.scrollTop || document.body.scrollTop));
                     var closestPointOnX = getClosestNumberFromArray(currentXPosition, pointValues);
 
-                    if(chart.options.pointDOMType == 'circle') {
+                    if(options.pointDOMType == 'circle') {
                         var pointElements = chart.container.querySelectorAll('.' + chart.options.classNames.point + '[cx="' + closestPointOnX + '"]');    
                     } else {
                         var pointElements = chart.container.querySelectorAll('.' + chart.options.classNames.point + '[x1="' + closestPointOnX + '"]');
@@ -157,7 +157,7 @@
                         });
 
                         closestPointOnY = getClosestNumberFromArray(currentYPosition, yPositions);
-                        if(chart.options.pointDOMType == 'circle') {
+                        if(options.pointDOMType == 'circle') {
                             pointElement = chart.container.querySelector('.' + chart.options.classNames.point + '[cx="' + closestPointOnX + '"][cy="' + closestPointOnY + '"]');
                         } else {
                             pointElement = chart.container.querySelector('.' + chart.options.classNames.point + '[x1="' + closestPointOnX + '"][y1="' + closestPointOnY + '"]');
