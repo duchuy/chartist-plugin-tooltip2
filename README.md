@@ -59,4 +59,8 @@ template: '<p>{{meta}}: {{value}}</p>',
 
 // The delay before hiding the tooltip after the mouse has left the point, slice or bar
 hideDelay: 500,
+
+// use <circle> instead of <line> to render data point
+pointDOMType: "line",
+
 ```

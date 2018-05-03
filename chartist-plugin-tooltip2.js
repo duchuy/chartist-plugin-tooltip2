@@ -60,6 +60,8 @@
             // only if a custom element is used for the trigger (TODO: test)
             triggerSelector: null,
 
+            // use <circle> instead of <line> to render data point
+            pointDOMType: "line",
             id: null,
         };
 
@@ -127,6 +129,7 @@
                 /**
                  * Prepare line tooltip
                  * Calculates the closest point on the line according to the current position of the mouse
+                 * 2018-05-03: add option to use cx/cy if .ct-point is rendered by <circle> instead of <line>
                  * @param Event e
                  */
                 function prepareLineTooltip(e) {
@@ -135,7 +138,12 @@
                     var currentYPosition = e.pageY - (boxData.top + (document.documentElement.scrollTop || document.body.scrollTop));
                     var closestPointOnX = getClosestNumberFromArray(currentXPosition, pointValues);
 
-                    var pointElements = chart.container.querySelectorAll('.' + chart.options.classNames.point + '[x1="' + closestPointOnX + '"]');
+                    if(chart.options.pointDOMType == 'circle') {
+                        var pointElements = chart.container.querySelectorAll('.' + chart.options.classNames.point + '[cx="' + closestPointOnX + '"]');    
+                    } else {
+                        var pointElements = chart.container.querySelectorAll('.' + chart.options.classNames.point + '[x1="' + closestPointOnX + '"]');
+                    }
+                    
                     var pointElement;
 
                     if (pointElements.length <= 1) {
@@ -149,7 +157,11 @@
                         });
 
                         closestPointOnY = getClosestNumberFromArray(currentYPosition, yPositions);
-                        pointElement = chart.container.querySelector('.' + chart.options.classNames.point + '[x1="' + closestPointOnX + '"][y1="' + closestPointOnY + '"]');
+                        if(chart.options.pointDOMType == 'circle') {
+                            pointElement = chart.container.querySelector('.' + chart.options.classNames.point + '[cx="' + closestPointOnX + '"][cy="' + closestPointOnY + '"]');
+                        } else {
+                            pointElement = chart.container.querySelector('.' + chart.options.classNames.point + '[x1="' + closestPointOnX + '"][y1="' + closestPointOnY + '"]');
+                        }
                     }
 
                     if (!pointElement || matches(pointElement, '.' + hoverClass)) {
