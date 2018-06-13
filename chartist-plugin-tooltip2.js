@@ -357,7 +357,8 @@
 
           var positionData = getTooltipPosition(relativeElement);
 
-          tooltipElement.style.transform = 'translate(' + positionData.left + 'px, ' + positionData.top + 'px)';
+          tooltipElement.style.transform = 'translate(' + positionData.left + 'px, ' + positionData.top + 'px) scale(1) rotate(0.01deg)';
+          tooltipElement.style.transitionDuration = '0.005s';
 
           if (ignoreClasses) {
             return;
