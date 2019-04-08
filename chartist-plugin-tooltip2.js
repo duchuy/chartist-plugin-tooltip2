@@ -177,7 +177,12 @@
             var closestPointOnY;
 
             Array.prototype.forEach.call(pointElements, function (point) {
-              yPositions.push(point.getAttribute('y1'));
+              if (options.pointDOMType == 'circle') {
+                yPositions.push(point.getAttribute('cy'));
+              }
+              else {
+                yPositions.push(point.getAttribute('y1'));  
+              }
             });
 
             closestPointOnY = getClosestNumberFromArray(currentYPosition, yPositions);
